@@ -20,7 +20,6 @@ function App() {
   // State variables using useState hook
   const [isThinking, setIsThinking] = useState(false); // For thinking state
   const [userReply, setUserReply] = useState(""); // For user's reply
-  const [assistantReply, setAssistantReply] = useState(""); // For assistant's reply
   const [threadID, setThreadID] = useState(null); // For thread ID
   const [messages, setMessages] = useState(null); // For storing messages
   const [tempUserReply, setTempUserReply] = useState(""); // For temporary user's reply
@@ -41,7 +40,8 @@ function App() {
     };
     fetchThreadID(); // Invoking the function
   },[]); // Empty dependency array means it runs only once when component mounts
-  
+
+ 
   // useEffect hook to scroll chat window to the bottom when messages change
   useEffect(() => {
     if (chatWindowRef.current) {
@@ -63,7 +63,7 @@ function App() {
       { role: "user", content: question }
     );
   }
-
+  
   // Function to run the assistant thread
   async function runThread() {
     const run = await openai.beta.threads.runs.create(
@@ -150,7 +150,7 @@ function App() {
           value={userReply} 
           onChange={handleUserReply} 
           onKeyDown={handleKeyDown}
-          placeholder="I want to watch..." 
+          placeholder="I want to watch something funny." 
         />
         <button onClick={main} className="send-button rounded">
           {isThinking ? 
@@ -161,7 +161,10 @@ function App() {
       </div>
     </div>
   );
+  
 }
+
+  
 
 // Rendering the App component
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
